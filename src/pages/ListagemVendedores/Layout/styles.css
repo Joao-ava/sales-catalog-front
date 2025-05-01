@@ -1,0 +1,73 @@
+.lista-container {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.lista-header {
+  text-align: center;
+}
+.lista-header h2 {
+  font-weight: bold;
+}
+
+.lista-header input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filtros button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.filtros button.ativo {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+}
+
+.grid-vendedores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.card-vendedor {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card-vendedor img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-vendedor h3 {
+  margin: 8px 0 4px;
+  font-size: 1rem;
+}
+
+.card-vendedor p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
