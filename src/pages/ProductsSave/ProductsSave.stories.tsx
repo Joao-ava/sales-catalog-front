@@ -36,7 +36,7 @@ const Component = (props: ProductsSaveProps) => {
 }
 
 const meta = {
-  title: 'Pages/ProducsSave',
+  title: 'Pages/ProductsSave',
   component: Component,
   tags: ['pages'],
   argTypes: {
