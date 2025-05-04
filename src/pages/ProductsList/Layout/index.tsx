@@ -1,43 +1,43 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import Product from '../../../dtos/Product'
 
-type Produto = {
-  nome: string;
-  preco: number;
-  imagem: string; // URL da imagem
-};
+export interface ProductsListProps {
+  loading: boolean
+  products: Product[]
+  canAdd: boolean
+}
 
-export function ListagemProdutos() {
-  const [produtos, setProdutos] = useState<Produto[]>([]);
-
-  useEffect(() => {
-    const dados = JSON.parse(localStorage.getItem("produtos") || "[]");
-    setProdutos(dados);
-  }, []);
-
+const Layout: React.FC<ProductsListProps> = ({
+  loading,
+  products,
+  canAdd
+}) => {
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h4>Seus Produtos</h4>
-        <a href="/cadastro-produto" className="btn btn-success btn-sm">
-          Adicionar
-        </a>
+        <h4>{canAdd ? 'Seus Produtos' : 'Produtos'}</h4>
+        {canAdd && (
+          <a href="/cadastro-produto" className="btn btn-success btn-sm">
+            Adicionar
+          </a>)
+        }
       </div>
 
-      {produtos.length === 0 ? (
+      {loading && (<p className="text-center">Carregando...</p>)}
+      {products.length === 0 ? (
         <p className="text-center">Nenhum produto cadastrado.</p>
       ) : (
         <div className="row">
-          {produtos.map((produto, index) => (
-            <div className="col-6 col-md-4 col-lg-3 mb-4" key={index}>
+          {products.map((item) => (
+            <div className="col-6 col-md-4 col-lg-3 mb-4" key={item._id}>
               <div className="text-center">
                 <img
-                  src={produto.imagem}
-                  alt={produto.nome}
+                  src={item.imagem}
+                  alt={item.nome}
                   style={{ width: "100%", height: "120px", objectFit: "cover", borderRadius: "8px" }}
                 />
-                <p className="mt-2 mb-0 fw-bold">{produto.nome}</p>
-                <p className="text-muted">R$ {produto.preco.toFixed(2)}</p>
+                <p className="mt-2 mb-0 fw-bold">{item.nome}</p>
+                <p className="text-muted">R$ {item.preco.toFixed(2)}</p>
               </div>
             </div>
           ))}
@@ -46,3 +46,5 @@ export function ListagemProdutos() {
     </div>
   );
 }
+
+export default Layout

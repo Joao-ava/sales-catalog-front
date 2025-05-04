@@ -3,16 +3,16 @@ import './App.css';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import { CadastroVendedor } from './pages/SignUp/Layout';
-import { CadastroProduto } from './pages/ProductsSave/Layout';
-import { ListagemProdutos } from './pages/SignUp/Layout/ListagemProdutos';
+// import { CadastroProduto } from './pages/ProductsSave/Layout';
+// import { ListagemProdutos } from './pages/ProductsList/Layout';
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* <Route path="/" element={<CadastroVendedor />} /> */}
-        <Route path="/cadastro-produto" element={<CadastroProduto />} />
-        <Route path="/produtos" element={<ListagemProdutos />} />
+        {/* <Route path="/cadastro-produto" element={<CadastroProduto />} /> */}
+        {/* <Route path="/produtos" element={<ListagemProdutos />} /> */}
       </Routes>
     </Router>
   );
