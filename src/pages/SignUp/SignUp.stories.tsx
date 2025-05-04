@@ -1,16 +1,38 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import { BrowserRouter } from 'react-router-dom';
 
-import Layout from './Layout';
+import Layout, { SignUpProps } from './Layout';
 
-const defaultArgs = {
+const defaultArgs: SignUpProps = {
+  email: '',
+  nome: '',
+  setEmail: fn(),
+  setNome: fn(),
   loading: false,
-  onSubmit: fn(),
-  onLogin: fn()
+  onSubmit: fn()
 }
+
+const Component = (props: SignUpProps) => {
+  const [nome, setNome] = useState(props.nome)
+  const [email, setEmail] = useState(props.email)
+  return (
+    <BrowserRouter>
+      <Layout
+        {...props}
+        nome={nome}
+        setNome={setNome}
+        email={email}
+        setEmail={setEmail}
+      />
+    </BrowserRouter>
+  )
+}
+
 const meta = {
   title: 'Pages/SignUp',
-  component: Layout,
+  component: Component,
   parameters: {
     layout: 'centered',
   },
@@ -18,7 +40,6 @@ const meta = {
   argTypes: {
     loading: { control: 'boolean' },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: defaultArgs,
 } satisfies Meta<typeof Layout>;
 
