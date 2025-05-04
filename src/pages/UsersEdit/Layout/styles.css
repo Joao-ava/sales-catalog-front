@@ -27,16 +27,3 @@
   flex-direction: column;
   gap: 10px;
 }
-
-.form button {
-  padding: 10px;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-.form button:hover {
-  background-color: #45a049;
-}

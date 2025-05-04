@@ -32,8 +32,8 @@ const defaultArgs: StoreListProps = {
 }
 
 const Component = (props: StoreListProps) => {
-  const [search, setSearch] = useState('');
-  const [status, setStatus] = useState('Todos');
+  const [search, setSearch] = useState(props.search || '');
+  const [status, setStatus] = useState(props.status || 'Todos');
 
   const data = props.stores.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase()) &&

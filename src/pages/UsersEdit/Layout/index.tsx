@@ -1,61 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
 
-const VendedorEditar: React.FC = () => {
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: '',
-    senha: '',
-  });
+export interface UsersEditProps {
+  name: string
+  setName: (value: string) => void
+  email: string
+  setEmail: (value: string) => void
+  password: string
+  setPassword: (value: string) => void
+  loading: boolean
+  onSubmit: React.FormEventHandler<HTMLFormElement>
+  onCancel: () => void
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Dados atualizados:', formData);
-    alert('Dados atualizados com sucesso!');
-    // colocar api 
-  };
-
-  const handleCancel = () => {
-    setFormData({ nome: '', email: '', senha: '' });
-    alert('Atualização cancelada.');
-  };
-
+const Layout: React.FC<UsersEditProps> = ({
+  name,
+  setName,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  loading,
+  onSubmit,
+  onCancel
+}) => {
   return (
     <div className="form-container">
       <h2>Atualizar Conta</h2>
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={onSubmit} className="form">
         <input
           type="text"
           name="nome"
-          value={formData.nome}
-          onChange={handleChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Nome"
         />
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
         <input
           type="password"
           name="senha"
-          value={formData.senha}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Senha"
         />
         <div className="form-buttons">
-          <button type="submit">Atualizar</button>
-          <button type="button" onClick={handleCancel}>Cancelar</button>
+          <button type="submit" className="btn btn-success w-100" disabled={loading}>Atualizar</button>
+          <button
+            type="button"
+            className="btn btn-outline-secondary btn-sm w-100"
+            onClick={onCancel}
+          >
+            Cancelar
+          </button>
         </div>
       </form>
     </div>
   );
 };
 
-export default VendedorEditar;
+export default Layout;
