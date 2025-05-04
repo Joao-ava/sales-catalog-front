@@ -6,4 +6,6 @@ export default interface Store {
   imagem: string
   horario: string
   status: string
+  lat?: number
+  lng?: number
 }
