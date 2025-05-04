@@ -1,13 +1,28 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export function CadastroProduto() {
-  const [nome, setNome] = useState("");
-  const [imagem, setImagem] = useState(""); // base64 ou URL local
-  const [preco, setPreco] = useState("");
-  const navigate = useNavigate();
+export interface ProductsSaveProps {
+  loading: boolean
+  nome: string
+  setNome: (value: string) => void
+  imagem?: string
+  setImagem: (value: string) => void
+  preco: number
+  setPreco: (value: number) => void
+  onSubmit: (e: React.FormEvent) => void
+}
 
+export default function Layout({
+  nome,
+  setNome,
+  imagem,
+  setImagem,
+  preco,
+  setPreco,
+  loading,
+  onSubmit
+}: ProductsSaveProps) {
   function handleImagemChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
@@ -16,28 +31,11 @@ export function CadastroProduto() {
     }
   }
 
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-
-    const novoProduto = {
-      nome,
-      imagem,
-      preco: parseFloat(preco),
-    };
-
-    const produtos = JSON.parse(localStorage.getItem("produtos") || "[]");
-    produtos.push(novoProduto);
-    localStorage.setItem("produtos", JSON.stringify(produtos));
-
-    alert("Produto cadastrado com sucesso!");
-    navigate("/produtos");
-  }
-
   return (
     <div className="d-flex align-items-center justify-content-center min-vh-100 bg-white">
       <div className="card p-4 shadow" style={{ width: "400px" }}>
         <h4 className="text-center mb-4">Cadastro de produto</h4>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="mb-3 text-start">
             <label className="form-label">Nome</label>
             <input
@@ -60,6 +58,7 @@ export function CadastroProduto() {
               required
             />
           </div>
+          <img src={imagem} className="img-thumbnail" />
 
           <div className="mb-4 text-start">
             <label className="form-label">Preço</label>
@@ -68,23 +67,22 @@ export function CadastroProduto() {
               className="form-control"
               placeholder="Ex: 6.00"
               value={preco}
-              onChange={(e) => setPreco(e.target.value)}
+              onChange={(e) => setPreco(parseFloat(e.target.value || '0'))}
               step="0.01"
               required
             />
           </div>
 
-          <button type="submit" className="btn btn-success w-100">
+          <button type="submit" disabled={loading} className="btn btn-success w-100">
             Salvar
           </button>
 
-          <button
-            type="button"
-            className="btn btn-link text-success mt-3 w-100"
-            onClick={() => navigate("/produtos")}
+          <Link
+            className="btn text-success mt-3 w-100"
+            to="/produtos"
           >
             Cancelar
-          </button>
+          </Link>
         </form>
       </div>
     </div>
