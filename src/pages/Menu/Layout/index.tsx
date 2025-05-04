@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 import { Package, Store, Settings, LogOut } from 'lucide-react';
 import './styles.css';
 
-const MenuVendedor: React.FC = () => {
+const Layout: React.FC = () => {
   return (
-    <div className="menu-container">
+    <div className="container">
       <h2><strong>Bem-vindo</strong></h2>
-      <div className="menu-grid">
-        <Link to="/produtos" className="menu-item">
+      <div className="row menu-grid">
+        <Link to="/products" className="col-sm-2 m-2 menu-item">
           <Package size={32} />
           <span>Seus Produtos</span>
         </Link>
-        <Link to="/cadastro-loja" className="menu-item">
+        <Link to="/store" className="col-sm-2 m-2 menu-item">
           <Store size={32} />
           <span>Cadastro da Loja</span>
         </Link>
-        <Link to="/configuracoes" className="menu-item">
+        <Link to="/settings" className="col-sm-2 m-2 menu-item">
           <Settings size={32} />
           <span>Configurações da Conta</span>
         </Link>
-        <Link to="/logout" className="menu-item">
+        <Link to="/logout" className="col-sm-2 m-2 menu-item">
           <LogOut size={32} />
           <span>Sair</span>
         </Link>
@@ -29,4 +29,4 @@ const MenuVendedor: React.FC = () => {
   );
 };
 
-export default MenuVendedor;
+export default Layout;
