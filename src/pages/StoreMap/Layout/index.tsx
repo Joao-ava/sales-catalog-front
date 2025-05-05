@@ -16,7 +16,6 @@ const Layout: React.FC<StoreMapProps> = ({
   const centerPosition: LatLngTuple = [-3.769516294283572, -38.480243680943545]
   return (
     <div className="bg-white">
-      {/* <h1>Lojas proximas</h1> */}
       <nav className="navbar navbar-dark bg-success">
         <div className="container-fluid">
             <button className="btn btn-outline-light">
@@ -25,7 +24,7 @@ const Layout: React.FC<StoreMapProps> = ({
             <span className="navbar-brand mx-auto">Lojas próximas</span>
         </div>
       </nav>
-      <MapContainer center={centerPosition} zoom={20} style={{ height: "500px", width: "100%" }}>
+      <MapContainer center={centerPosition} zoom={20} style={{ height: "100vh", width: "100%" }}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
