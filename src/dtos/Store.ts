@@ -1,3 +1,9 @@
+export interface Horario {
+  from: string
+  to: string
+  weekDay: string
+}
+
 export default interface Store {
   _id: string
   name: string
@@ -5,6 +11,7 @@ export default interface Store {
   referencia: string
   imagem: string
   horario: string
+  horarios: Horario[]
   status: string
   lat?: number
   lng?: number

@@ -14,6 +14,7 @@ const defaultArgs: StoreListProps = {
       horario: '13:00 - 20:40',
       imagem: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/05/pipoca.jpg',
       status: 'Ativos',
+      horarios: []
     },
     {
       _id: '2',
@@ -23,6 +24,7 @@ const defaultArgs: StoreListProps = {
       horario: '13:00 - 20:40',
       imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2v9ZfeGVTB6ftaiQk3_LHVWFQ8w6fPZX3TQ&s',
       status: 'Fechados',
+      horarios: []
     },
   ],
   status: '',

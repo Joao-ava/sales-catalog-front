@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaTrash, FaPlus, FaImage } from 'react-icons/fa';
+import { Trash, Plus, Image } from 'lucide-react'
+import { Horario } from '../../../dtos/Store';
 
-const FormularioLoja: React.FC = () => {
-  const [horariosFuncionamento, setHorariosFuncionamento] = useState([
-    { dia: 'Segunda', de: '11:00', ate: '14:00' },
-    { dia: 'Terça', de: '11:00', ate: '14:00' },
-    { dia: 'Quarta', de: '11:00', ate: '14:00' },
-    { dia: 'Quinta', de: '11:00', ate: '14:00' },
-    { dia: 'Sexta', de: '11:00', ate: '14:00' },
-  ]);
+export interface StoreSaveProps {
+  name: string
+  bloco: string
+  referencia: string
+  imagem: string
+  horario: string
+  horarios: Horario[]
+  setHorarios: (values: Horario[]) => void
+  loading: boolean
+}
 
-  const adicionarDia = () => {
-    setHorariosFuncionamento([...horariosFuncionamento, { dia: '', de: '', ate: '' }]);
+const FormularioLoja: React.FC<StoreSaveProps> = ({ horarios, setHorarios, loading }) => {
+  const weekDays = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+  const addDay = () => {
+    setHorarios([...horarios, { weekDay: weekDays[0], from: '', to: '' }]);
   };
 
-  const removerDia = (indice: number) => {
-    setHorariosFuncionamento(horariosFuncionamento.filter((_, i) => i !== indice));
+  const removeDay = (indice: number) => {
+    setHorarios(horarios.filter((_, i) => i !== indice));
   };
 
   return (
@@ -32,7 +37,7 @@ const FormularioLoja: React.FC = () => {
         <label className="form-label text-start">Imagem</label>
         <div className="input-group">
           <input type="file" className="form-control rounded-start-3" />
-          <span className="input-group-text rounded-end-3"><FaImage /></span>
+          <span className="input-group-text rounded-end-3"><Image /></span>
         </div>
       </div>
 
@@ -52,33 +57,37 @@ const FormularioLoja: React.FC = () => {
       </div>
 
       <h6 className="fw-bold mt-4 mb-2 text-start">Horário de funcionamento</h6>
-      {horariosFuncionamento.map((item, indice) => (
+      {horarios.map((item, indice) => (
         <div className="row mb-2 align-items-center" key={indice}>
           <div className="col-3 text-start">
-            <small className="fw-semibold">{item.dia || `Dia ${indice + 1}`}</small>
+            <select className="form-control form-control-sm" name="cars" id="cars">
+              {weekDays.map((item) => (
+                <option key={item} value="item">{item}</option>
+              ))}
+            </select>
           </div>
           <div className="col-3">
-            <input type="time" className="form-control form-control-sm" defaultValue={item.de} />
+            <input type="time" className="form-control form-control-sm" defaultValue={item.from} />
           </div>
           <div className="col-3">
-            <input type="time" className="form-control form-control-sm" defaultValue={item.ate} />
+            <input type="time" className="form-control form-control-sm" defaultValue={item.to} />
           </div>
           <div className="col-3 text-center">
-            <button onClick={() => removerDia(indice)} className="btn btn-sm btn-outline-danger">
-              <FaTrash size={14} />
+            <button onClick={() => removeDay(indice)} className="btn btn-sm btn-outline-danger">
+              <Trash size={14} />
             </button>
           </div>
         </div>
       ))}
 
       <div className="text-center mb-4">
-        <button onClick={adicionarDia} className="btn btn-outline-secondary rounded-circle" style={{ width: 48, height: 48 }}>
-          <FaPlus />
+        <button onClick={addDay} className="btn btn-outline-secondary rounded-circle" style={{ width: 48, height: 48 }}>
+          <Plus />
         </button>
       </div>
 
-      <button className="btn btn-success w-100 rounded-3 mb-2">Salvar</button>
-      <button className="btn btn-link text-danger w-100">Cancelar</button>
+      <button disabled={loading} className="btn btn-success w-100 rounded-3 mb-2">Salvar</button>
+      <button className="btn text-success w-100">Cancelar</button>
     </div>
   );
 };
