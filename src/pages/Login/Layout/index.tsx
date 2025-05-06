@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import './styles.css';
 
 export interface LoginProps {
   loading: boolean;
   onSubmit: (email: string, senha: string) => Promise<void>;
-  onSignUp: () => Promise<void>;
 }
 
-function LoginLayout({ loading, onSubmit, onSignUp }: LoginProps) {
+function LoginLayout({ loading, onSubmit }: LoginProps) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -37,9 +37,9 @@ function LoginLayout({ loading, onSubmit, onSignUp }: LoginProps) {
       <button className="botao-login" onClick={handleSubmit} disabled={loading}>
         {loading ? 'Entrando...' : 'Login'}
       </button>
-      <p className="link-acao" onClick={onSignUp}>
+      <Link to="/sign-up" className="link-acao">
         Cadastre-se
-      </p>
+      </Link>
     </div>
   );
 }

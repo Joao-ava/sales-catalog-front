@@ -1,16 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import { BrowserRouter } from "react-router-dom";
 
-import Layout from './Layout';
+import Layout, { LoginProps } from './Layout';
 
 const defaultArgs = {
   loading: false,
-  onSubmit: fn(),
-  onSignUp: fn()
+  onSubmit: fn()
+}
+const Component = (props: LoginProps) => {
+  return (
+    <BrowserRouter>
+      <Layout {...props} />
+    </BrowserRouter>
+  )
 }
 const meta = {
   title: 'Pages/Login',
-  component: Layout,
+  component: Component,
   parameters: {
     layout: 'centered',
   },
