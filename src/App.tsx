@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import SignUp from './pages/SignUp';
+import Menu from './pages/Menu';
 // import { CadastroProduto } from './pages/ProductsSave/Layout';
 // import { ListagemProdutos } from './pages/ProductsList/Layout';
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/menu" element={<Menu />} />
         {/* <Route path="/produtos" element={<ListagemProdutos />} /> */}
       </Routes>
     </Router>
