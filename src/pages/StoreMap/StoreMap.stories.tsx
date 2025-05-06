@@ -42,6 +42,9 @@ const Component = (props: StoreMapProps) => {
 const meta: Meta<typeof Layout> = {
   title: 'pages/StoreMap',
   component: Component,
+  parameters: {
+    layout: 'fullscreen',
+  },
   tags: ['pages'],
   args: defaultArgs,
 };
