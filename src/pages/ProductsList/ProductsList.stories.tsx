@@ -6,7 +6,7 @@ const defaultArgs: ProductsListProps = {
   products: [
     {
       _id: '1',
-      nome: 'Pipoca do bloco C',
+      nome: 'Pipoca tamanho M',
       imagem: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/05/pipoca.jpg',
       preco: 20,
       createdAt: '2025-04-18T22:19:34.949Z'

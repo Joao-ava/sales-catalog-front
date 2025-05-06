@@ -1,4 +1,5 @@
 
+import { BrowserRouter } from 'react-router-dom';
 import { Meta, StoryObj } from '@storybook/react';
 import Layout, { StoreMapProps } from './Layout';
 
@@ -31,9 +32,16 @@ const defaultArgs: StoreMapProps = {
   ],
 }
 
+const Component = (props: StoreMapProps) => {
+  return (
+    <BrowserRouter>
+      <Layout {...props} />
+    </BrowserRouter>
+  )
+}
 const meta: Meta<typeof Layout> = {
   title: 'pages/StoreMap',
-  component: Layout,
+  component: Component,
   tags: ['pages'],
   args: defaultArgs,
 };

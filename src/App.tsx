@@ -8,7 +8,7 @@ import Menu from './pages/Menu';
 import StoreList from './pages/StoreList';
 import StoreMap from './pages/StoreMap';
 // import { CadastroProduto } from './pages/ProductsSave/Layout';
-// import { ListagemProdutos } from './pages/ProductsList/Layout';
+import ProductsList from './pages/ProductsList';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/" element={<StoreList />} />
         <Route path="/stores/map" element={<StoreMap />} />
-        {/* <Route path="/produtos" element={<ListagemProdutos />} /> */}
+        <Route path="/stores/:id/products" element={<ProductsList />} />
       </Routes>
     </Router>
   );

@@ -34,7 +34,7 @@ const Layout: React.FC<StoreMapProps> = ({
           <Marker position={[item.lng || 0, item.lat || 0]} key={item._id}>
             <Popup>
               {item.name} <br />
-              <a href={`/stores/${item._id}`}>Acesse aqui</a>.
+              <a href={`/stores/${item._id}/products`}>Acesse aqui</a>.
             </Popup>
           </Marker>
         ))}
@@ -46,7 +46,7 @@ const Layout: React.FC<StoreMapProps> = ({
               {stores.map((item) => (
                 <li className="list-group-item d-flex justify-content-between align-items-center" key={item._id}>
                   <p>{item.name} - {item.horario}</p>
-                  <a href={`/stores/${item._id}`}>Acesse aqui</a>
+                  <Link to={`/stores/${item._id}/products`}>Acesse aqui</Link>
                 </li>
               ))}
             </ul>

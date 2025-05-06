@@ -44,13 +44,13 @@ const Layout: React.FC<StoreListProps> = ({ status, search, setStatus, setSearch
 
       <div className="grid-vendedores">
         {stores.map((item) => (
-          <div key={item._id} className="card-vendedor">
+          <Link to={`/stores/${item._id}/products`} key={item._id} className="card-vendedor text-black">
             <img src={item.imagem} alt={item.name} />
             <h3>{item.name}</h3>
             <p>{item.bloco}</p>
             <p>{item.referencia}</p>
             <p>{item.horario}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
