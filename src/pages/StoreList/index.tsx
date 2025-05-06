@@ -14,7 +14,7 @@ const StoreList: React.FC = () => {
       imagem: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/05/pipoca.jpg',
       horario: '09:00 - 18:00',
       horarios: [],
-      status: 'Ativo'
+      status: 'Ativos'
     },
     {
       _id: '2',
@@ -28,13 +28,18 @@ const StoreList: React.FC = () => {
     }
   ]);
 
+  const data = stores.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase()) &&
+    (status === 'Todos' || item.status === status)
+  );
+
   return (
     <Layout
       search={search}
       setSearch={setSearch}
       status={status}
       setStatus={setStatus}
-      stores={stores}
+      stores={data}
     />
   );
 };
