@@ -1,7 +1,8 @@
 import React from "react";
 import { LatLngTuple } from "leaflet";
-import { Marker, Popup, TileLayer, MapContainer } from "react-leaflet";
+import { Link } from "react-router-dom";
 import { ChevronLeft } from 'lucide-react';
+import { Marker, Popup, TileLayer, MapContainer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import Store from "../../../dtos/Store";
 import './styles.css'
@@ -15,12 +16,12 @@ const Layout: React.FC<StoreMapProps> = ({
 }) => {
   const centerPosition: LatLngTuple = [-3.769516294283572, -38.480243680943545]
   return (
-    <div className="bg-white">
+    <div className="bg-white w-100">
       <nav className="navbar navbar-dark bg-success">
         <div className="container-fluid">
-            <button className="btn btn-outline-light">
+            <Link to="/" className="btn btn-outline-light">
               <ChevronLeft />
-            </button>
+            </Link>
             <span className="navbar-brand mx-auto">Lojas próximas</span>
         </div>
       </nav>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Store from '../../../dtos/Store'
 import './styles.css';
 
@@ -15,7 +16,13 @@ const Layout: React.FC<StoreListProps> = ({ status, search, setStatus, setSearch
   return (
     <div className="lista-container">
       <header className="lista-header">
-        <h2>Lista de Vendedores</h2>
+        <div className="d-flex align-items-center justify-content-between">
+          <div />
+          <h2>Lista de Vendedores</h2>
+          <Link to="/stores/map" className="btn btn-success">
+            Mapa
+          </Link>
+        </div>
         <input
           type="text"
           placeholder="Buscar vendedor..."

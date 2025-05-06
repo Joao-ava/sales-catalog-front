@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp';
 import Menu from './pages/Menu';
 import StoreList from './pages/StoreList';
+import StoreMap from './pages/StoreMap';
 // import { CadastroProduto } from './pages/ProductsSave/Layout';
 // import { ListagemProdutos } from './pages/ProductsList/Layout';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/" element={<StoreList />} />
+        <Route path="/stores/map" element={<StoreMap />} />
         {/* <Route path="/produtos" element={<ListagemProdutos />} /> */}
       </Routes>
     </Router>

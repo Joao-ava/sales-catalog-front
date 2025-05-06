@@ -1,8 +1,9 @@
 
+import { useState } from 'react';
+import { BrowserRouter } from "react-router-dom";
+import { fn } from '@storybook/test';
 import { Meta, StoryObj } from '@storybook/react';
 import Layout, { StoreListProps } from './Layout';
-import { fn } from '@storybook/test';
-import { useState } from 'react';
 
 const defaultArgs: StoreListProps = {
   stores: [
@@ -42,14 +43,16 @@ const Component = (props: StoreListProps) => {
     (status === 'Todos' || item.status === status)
   );
   return (
-    <Layout
-      {...props}
-      stores={data}
-      search={search}
-      setSearch={setSearch}
-      status={status}
-      setStatus={setStatus}
-    />
+    <BrowserRouter>
+      <Layout
+        {...props}
+        stores={data}
+        search={search}
+        setSearch={setSearch}
+        status={status}
+        setStatus={setStatus}
+      />
+    </BrowserRouter>
   )
 }
 
