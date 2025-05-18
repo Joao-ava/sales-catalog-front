@@ -1,21 +1,39 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Trash, Plus, Image } from 'lucide-react'
+import { Trash, Plus, Image } from 'lucide-react';
 import { Horario } from '../../../dtos/Store';
 
 export interface StoreSaveProps {
-  name: string
-  bloco: string
-  referencia: string
-  imagem: string
-  horario: string
-  horarios: Horario[]
-  setHorarios: (values: Horario[]) => void
-  loading: boolean
+  name: string;
+  bloco: string;
+  referencia: string;
+  imagem: string;
+  horarios: Horario[];
+  setHorarios: (values: Horario[]) => void;
+  loading: boolean;
+  onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlocoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onReferenciaChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSave: () => void;
 }
 
-const FormularioLoja: React.FC<StoreSaveProps> = ({ horarios, setHorarios, loading }) => {
+const FormularioLoja: React.FC<StoreSaveProps> = ({
+  name,
+  bloco,
+  referencia,
+  imagem,
+  horarios,
+  setHorarios,
+  loading,
+  onNameChange,
+  onBlocoChange,
+  onReferenciaChange,
+  onImageChange,
+  onSave,
+}) => {
   const weekDays = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+
   const addDay = () => {
     setHorarios([...horarios, { weekDay: weekDays[0], from: '', to: '' }]);
   };
@@ -30,47 +48,55 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({ horarios, setHorarios, loadi
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Nome</label>
-        <input type="text" className="form-control rounded-3" placeholder="Nome do estabelecimento" />
+        <input type="text" className="form-control rounded-3" placeholder="Nome do estabelecimento" value={name} onChange={onNameChange} />
       </div>
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Imagem</label>
         <div className="input-group">
-          <input type="file" className="form-control rounded-start-3" />
+          <input type="file" className="form-control rounded-start-3" onChange={onImageChange} />
           <span className="input-group-text rounded-end-3"><Image /></span>
         </div>
+        {imagem && <img src={imagem} alt="Preview" className="mt-2 w-100 rounded" />}
       </div>
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Bloco</label>
-        <input type="text" className="form-control rounded-3" placeholder="Perto de qual bloco está" />
+        <input type="text" className="form-control rounded-3" placeholder="Perto de qual bloco está" value={bloco} onChange={onBlocoChange} />
       </div>
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Ponto de referência</label>
-        <input type="text" className="form-control rounded-3" placeholder="Cite um ponto de referência" />
-      </div>
-
-      <div className="mb-3 text-start">
-        <label className="form-label text-start">Métodos de pagamento</label>
-        <input type="text" className="form-control rounded-3" placeholder="Selecione seus métodos de pagamento" />
+        <input type="text" className="form-control rounded-3" placeholder="Cite um ponto de referência" value={referencia} onChange={onReferenciaChange} />
       </div>
 
       <h6 className="fw-bold mt-4 mb-2 text-start">Horário de funcionamento</h6>
       {horarios.map((item, indice) => (
         <div className="row mb-2 align-items-center" key={indice}>
           <div className="col-3 text-start">
-            <select className="form-control form-control-sm" name="cars" id="cars">
-              {weekDays.map((item) => (
-                <option key={item} value="item">{item}</option>
+            <select className="form-control form-control-sm" value={item.weekDay} onChange={(e) => {
+              const novos = [...horarios];
+              novos[indice].weekDay = e.target.value;
+              setHorarios(novos);
+            }}>
+              {weekDays.map((day) => (
+                <option key={day} value={day}>{day}</option>
               ))}
             </select>
           </div>
           <div className="col-3">
-            <input type="time" className="form-control form-control-sm" defaultValue={item.from} />
+            <input type="time" className="form-control form-control-sm" value={item.from} onChange={(e) => {
+              const novos = [...horarios];
+              novos[indice].from = e.target.value;
+              setHorarios(novos);
+            }} />
           </div>
           <div className="col-3">
-            <input type="time" className="form-control form-control-sm" defaultValue={item.to} />
+            <input type="time" className="form-control form-control-sm" value={item.to} onChange={(e) => {
+              const novos = [...horarios];
+              novos[indice].to = e.target.value;
+              setHorarios(novos);
+            }} />
           </div>
           <div className="col-3 text-center">
             <button onClick={() => removeDay(indice)} className="btn btn-sm btn-outline-danger">
@@ -86,7 +112,7 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({ horarios, setHorarios, loadi
         </button>
       </div>
 
-      <button disabled={loading} className="btn btn-success w-100 rounded-3 mb-2">Salvar</button>
+      <button disabled={loading} onClick={onSave} className="btn btn-success w-100 rounded-3 mb-2">Salvar</button>
       <button className="btn text-success w-100">Cancelar</button>
     </div>
   );
