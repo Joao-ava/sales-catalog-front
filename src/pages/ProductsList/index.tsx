@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
 import Product from '../../dtos/Product';
+import axios from 'axios';
 
 const ProductsList: React.FC = () => {
-  const [products] = useState<Product[]>([
-    {
-      _id: '1',
-      nome: 'Pipoca tamanho M',
-      imagem: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/05/pipoca.jpg',
-      preco: 20,
-      createdAt: '2025-04-18T22:19:34.949Z'
-    },
-    {
-      _id: '2',
-      nome: 'Kalzone',
-      imagem: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2v9ZfeGVTB6ftaiQk3_LHVWFQ8w6fPZX3TQ&s',
-      preco: 20,
-      createdAt: '2025-04-18T22:19:34.949Z'
-    },
-  ]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      setLoading(true);
+      try {
+        const response = await axios.get('http://localhost:3000/produtos');
+        setProducts(response.data); // ajuste conforme o retorno do backend
+      } catch (error) {
+        alert('Erro ao buscar produtos');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
 
   return (
     <Layout
       products={products}
-      loading={false}
+      loading={loading}
       canAdd={false}
     />
   );

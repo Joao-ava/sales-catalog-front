@@ -1,12 +1,23 @@
 export interface SignUpProps {
-  email: string
-  setEmail: (value: string) => void
-  nome: string
-  setNome: (value: string) => void
-  loading: boolean
-  onSubmit: () => Promise<void>
+  email: string;
+  setEmail: (value: string) => void;
+  nome: string;
+  setNome: (value: string) => void;
+  senha: string;
+  setSenha: (value: string) => void;
+  confirmarSenha: string;
+  setConfirmarSenha: (value: string) => void;
+  loading: boolean;
+  onSubmit: (e?: React.FormEvent) => Promise<void>;
 }
-function SignUpLayout({ email, setEmail, nome, setNome, loading, onSubmit }: SignUpProps) {
+
+function SignUpLayout({
+  email, setEmail,
+  nome, setNome,
+  senha, setSenha,
+  confirmarSenha, setConfirmarSenha,
+  loading, onSubmit
+}: SignUpProps) {
   return (
     <div className="d-flex align-items-center justify-content-center">
       <div className="card p-4 shadow">
@@ -37,6 +48,8 @@ function SignUpLayout({ email, setEmail, nome, setNome, loading, onSubmit }: Sig
             <input
               type="password"
               className="form-control"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
               required
             />
           </div>
@@ -45,6 +58,8 @@ function SignUpLayout({ email, setEmail, nome, setNome, loading, onSubmit }: Sig
             <input
               type="password"
               className="form-control"
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
               required
             />
           </div>
@@ -60,7 +75,7 @@ function SignUpLayout({ email, setEmail, nome, setNome, loading, onSubmit }: Sig
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUpLayout
+export default SignUpLayout;
