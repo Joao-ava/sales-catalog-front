@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { AxiosError } from 'axios';
+import api from '../../services/api';
 import SignUpLayout from './Layout';
 
 const SignUp: React.FC = () => {
@@ -19,14 +20,15 @@ const SignUp: React.FC = () => {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/auth/register', {
+      await api.post('/users', {
         email,
         password: senha,
         name: nome,
       });
       alert('Cadastro realizado com sucesso!');
       navigate('/login');
-    } catch (error: any) {
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>
       alert(error.response?.data?.message || 'Erro ao cadastrar. Verifique os dados e tente novamente.');
     } finally {
       setLoading(false);
