@@ -30,6 +30,7 @@ const defaultArgs: StoreListProps = {
   ],
   status: '',
   search: '',
+  loading: false,
   setStatus: fn(),
   setSearch: fn()
 }

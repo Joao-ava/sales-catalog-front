@@ -4,6 +4,7 @@ import Store from '../../../dtos/Store'
 import './styles.css';
 
 export interface StoreListProps {
+  loading: boolean
   search: string
   setSearch: (value: string) => void
   status: string
@@ -11,7 +12,7 @@ export interface StoreListProps {
   stores: Store[]
 }
 
-const Layout: React.FC<StoreListProps> = ({ status, search, setStatus, setSearch, stores }) => {
+const Layout: React.FC<StoreListProps> = ({ loading, status, search, setStatus, setSearch, stores }) => {
   const filterOptions = ['Todos', 'Ativos', 'Fechados']
   return (
     <div className="lista-container">
@@ -43,6 +44,7 @@ const Layout: React.FC<StoreListProps> = ({ status, search, setStatus, setSearch
       </header>
 
       <div className="grid-vendedores">
+        {loading ? <p>Carregando...</p> : ''}
         {stores.map((item) => (
           <Link to={`/stores/${item._id}/products`} key={item._id} className="card-vendedor text-black">
             <img src={item.imagem} alt={item.name} />
