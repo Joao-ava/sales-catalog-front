@@ -16,11 +16,11 @@ const Login: React.FC = () => {
         password: senha,
       });
 
-      const { token, user } = response.data;
+      const { token, usuario } = response.data;
 
       // Salvar no localStorage
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(usuario));
 
       // Redirecionar
       navigate('/menu');
