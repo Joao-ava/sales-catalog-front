@@ -9,6 +9,7 @@ import StoreList from './pages/StoreList';
 import StoreMap from './pages/StoreMap';
 // import { CadastroProduto } from './pages/ProductsSave/Layout';
 import ProductsList from './pages/ProductsList';
+import StoreSave from './pages/StoreSave';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/" element={<StoreList />} />
+        <Route path="/store" element={<StoreSave />} />
         <Route path="/stores/map" element={<StoreMap />} />
         <Route path="/stores/:id/products" element={<ProductsList />} />
       </Routes>
