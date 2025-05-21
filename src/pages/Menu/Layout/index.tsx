@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { Package, Store, Settings, LogOut } from 'lucide-react';
 import './styles.css';
 
-const Layout: React.FC = () => {
+interface MenuProps {
+  onLogout: () => void
+}
+const Layout: React.FC<MenuProps> = ({ onLogout }) => {
   return (
     <div className="container">
       <h2><strong>Bem-vindo</strong></h2>
@@ -20,10 +23,10 @@ const Layout: React.FC = () => {
           <Settings size={32} />
           <span>Configurações da Conta</span>
         </Link>
-        <Link to="/logout" className="col-sm-2 m-2 menu-item">
+        <button onClick={onLogout} className="col-sm-2 m-2 menu-item">
           <LogOut size={32} />
           <span>Sair</span>
-        </Link>
+        </button>
       </div>
     </div>
   );
