@@ -10,6 +10,7 @@ import StoreMap from './pages/StoreMap';
 import ProductsSave from './pages/ProductsSave';
 import ProductsList from './pages/ProductsList';
 import StoreSave from './pages/StoreSave';
+import UsersEdit from './pages/UsersEdit';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/stores/map" element={<StoreMap />} />
         <Route path="/stores/:id/products" element={<ProductsList />} />
         <Route path="/products/save" element={<ProductsSave />} />
+        <Route path="/settings" element={<UsersEdit />} />
       </Routes>
     </Router>
   );
