@@ -4,14 +4,15 @@ import { Package, Store, Settings, LogOut } from 'lucide-react';
 import './styles.css';
 
 interface MenuProps {
+  storeId: string
   onLogout: () => void
 }
-const Layout: React.FC<MenuProps> = ({ onLogout }) => {
+const Layout: React.FC<MenuProps> = ({ onLogout, storeId }) => {
   return (
     <div className="container">
       <h2><strong>Bem-vindo</strong></h2>
       <div className="row menu-grid">
-        <Link to="/products" className="col-sm-2 m-2 menu-item">
+        <Link to={`/stores/${storeId}/products`} className="col-sm-2 m-2 menu-item">
           <Package size={32} />
           <span>Seus Produtos</span>
         </Link>

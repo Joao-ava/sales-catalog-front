@@ -7,7 +7,8 @@ const meta = {
   title: 'pages/Menu',
   component: Layout,
   args: {
-    onLogout: fn()
+    onLogout: fn(),
+    storeId: ''
   },
   decorators: [
     (Story) => (

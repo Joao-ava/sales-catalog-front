@@ -4,6 +4,7 @@ import Layout from './Layout';
 
 const Menu: React.FC = () => {
   const navigate = useNavigate()
+  const { storeId } = JSON.parse(localStorage.getItem('user') || '{}')
   const onLogout = () => {
     // limpar localStorage
     localStorage.removeItem('token');
@@ -12,7 +13,7 @@ const Menu: React.FC = () => {
     // Redirecionar
     navigate('/login');
   }
-  return <Layout onLogout={onLogout} />;
+  return <Layout onLogout={onLogout} storeId={storeId} />;
 };
 
 export default Menu;
