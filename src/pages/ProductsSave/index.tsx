@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from './Layout';
+import api from '../../services/api';
 
 export default function ProductsSave() {
   const [nome, setNome] = useState('');
-  const [imagem, setImagem] = useState('');
+  const [imagem, setImagem] = useState<File>();
   const [preco, setPreco] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -14,20 +15,20 @@ export default function ProductsSave() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nome, imagem, preco })
-      });
+      const form = new FormData();
+      form.append('nome', nome);
+      form.append('preco', String(preco));
+      if (imagem) form.append('imagem', imagem);
 
-      if (!response.ok) {
-        throw new Error('Erro ao salvar o produto');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
       }
+      await api.post('/products', form, config);
 
       alert('Produto cadastrado com sucesso!');
-      navigate('/produtos');
+      navigate('/menu');
     } catch (error) {
       console.error(error);
       alert('Erro ao salvar produto');
@@ -40,7 +41,7 @@ export default function ProductsSave() {
     <Layout
       nome={nome}
       setNome={setNome}
-      imagem={imagem}
+      imagem={imagem ? URL.createObjectURL(imagem) : ''}
       setImagem={setImagem}
       preco={preco}
       setPreco={setPreco}

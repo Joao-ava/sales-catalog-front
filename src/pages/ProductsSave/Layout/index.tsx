@@ -7,7 +7,7 @@ export interface ProductsSaveProps {
   nome: string
   setNome: (value: string) => void
   imagem?: string
-  setImagem: (value: string) => void
+  setImagem: (value: File | undefined) => void
   preco: number
   setPreco: (value: number) => void
   onSubmit: (e: React.FormEvent) => void
@@ -25,10 +25,7 @@ export default function Layout({
 }: ProductsSaveProps) {
   function handleImagemChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (file) {
-      const urlImagem = URL.createObjectURL(file);
-      setImagem(urlImagem);
-    }
+    setImagem(file);
   }
 
   return (
@@ -67,7 +64,7 @@ export default function Layout({
               className="form-control"
               placeholder="Ex: 6.00"
               value={preco}
-              onChange={(e) => setPreco(parseFloat(e.target.value || '0'))}
+              onChange={(e) => setPreco((e.target.value) as unknown as number)}
               step="0.01"
               required
             />

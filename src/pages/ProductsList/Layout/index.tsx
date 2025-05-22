@@ -17,7 +17,7 @@ const Layout: React.FC<ProductsListProps> = ({
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h4>{canAdd ? 'Seus Produtos' : 'Produtos'}</h4>
         {canAdd && (
-          <a href="/cadastro-produto" className="btn btn-success btn-sm">
+          <a href="/products/save" className="btn btn-success btn-sm">
             Adicionar
           </a>)
         }

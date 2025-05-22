@@ -7,7 +7,7 @@ import SignUp from './pages/SignUp';
 import Menu from './pages/Menu';
 import StoreList from './pages/StoreList';
 import StoreMap from './pages/StoreMap';
-// import { CadastroProduto } from './pages/ProductsSave/Layout';
+import ProductsSave from './pages/ProductsSave';
 import ProductsList from './pages/ProductsList';
 import StoreSave from './pages/StoreSave';
 
@@ -22,6 +22,7 @@ function App() {
         <Route path="/store" element={<StoreSave />} />
         <Route path="/stores/map" element={<StoreMap />} />
         <Route path="/stores/:id/products" element={<ProductsList />} />
+        <Route path="/products/save" element={<ProductsSave />} />
       </Routes>
     </Router>
   );
