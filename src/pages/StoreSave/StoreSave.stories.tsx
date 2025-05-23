@@ -7,7 +7,11 @@ const defaultArgs: StoreSaveProps = {
   name: 'Pipoca do bloco C',
   bloco: 'C',
   referencia: 'Em frente ao bloco C',
-  horario: '13:00 - 20:40',
+  onBlocoChange: fn(),
+  onImageChange: fn(),
+  onNameChange: fn(),
+  onReferenciaChange: fn(),
+  onSave: fn(),
   imagem: 'https://blog.gsuplementos.com.br/wp-content/uploads/2021/05/pipoca.jpg',
   horarios: [
     { weekDay: 'Segunda', from: '11:00', to: '14:00' },

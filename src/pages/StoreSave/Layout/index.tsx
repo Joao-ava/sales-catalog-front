@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Trash, Plus, Image } from 'lucide-react';
 import { Horario } from '../../../dtos/Store';
+import { weekDays } from '../../../utils/weekdays';
 
 export interface StoreSaveProps {
   name: string;
@@ -32,8 +33,6 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({
   onImageChange,
   onSave,
 }) => {
-  const weekDays = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-
   const addDay = () => {
     setHorarios([...horarios, { weekDay: weekDays[0], from: '', to: '' }]);
   };

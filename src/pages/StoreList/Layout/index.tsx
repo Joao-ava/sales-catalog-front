@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Store from '../../../dtos/Store'
 import './styles.css';
+import { weekDays } from '../../../utils/weekdays';
 
 export interface StoreListProps {
   loading: boolean
@@ -20,9 +21,14 @@ const Layout: React.FC<StoreListProps> = ({ loading, status, search, setStatus, 
         <div className="d-flex align-items-center justify-content-between">
           <div />
           <h2>Lista de Vendedores</h2>
-          <Link to="/stores/map" className="btn btn-success">
-            Mapa
-          </Link>
+          <div>
+            <Link to="/stores/map" className="btn btn-success">
+              Mapa
+            </Link>
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+          </div>
         </div>
         <input
           type="text"
@@ -45,15 +51,23 @@ const Layout: React.FC<StoreListProps> = ({ loading, status, search, setStatus, 
 
       <div className="grid-vendedores">
         {loading ? <p>Carregando...</p> : ''}
-        {stores.map((item) => (
-          <Link to={`/stores/${item._id}/products`} key={item._id} className="card-vendedor text-black">
-            <img src={item.imagem} alt={item.name} />
-            <h3>{item.name}</h3>
-            <p>{item.bloco}</p>
-            <p>{item.referencia}</p>
-            <p>{item.horario}</p>
-          </Link>
-        ))}
+        {stores.map((item) => {
+          const today = new Date();
+          const day = weekDays[today.getDay()];
+          const hours = item.horarios
+            .filter((item) => item.weekDay === day)
+            .map((item) => `${item.from}:${item.to}`)
+            .join('\n');
+          return (
+            <Link to={`/stores/${item._id}/products`} key={item._id} className="card-vendedor text-black">
+              <img src={item.imagem} alt={item.name} />
+              <h3>{item.name}</h3>
+              <p>{item.bloco}</p>
+              <p>{item.referencia}</p>
+              <p>{hours}</p>
+            </Link>
+          )
+        })}
       </div>
     </div>
   );
