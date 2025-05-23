@@ -1,6 +1,7 @@
 import React from 'react';
 import Product from '../../../dtos/Product'
 import { Link } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 
 export interface ProductsListProps {
   loading: boolean
@@ -16,11 +17,15 @@ const Layout: React.FC<ProductsListProps> = ({
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
+        <Link to={canAdd ? '/menu' : '/'}>
+          <ChevronLeft />
+        </Link>
         <h4>{canAdd ? 'Seus Produtos' : 'Produtos'}</h4>
-        {canAdd && (
-          <Link to="/products/save" className="btn btn-success btn-sm">
-            Adicionar
-          </Link>)
+        {canAdd ? (
+            <Link to="/products/save" className="btn btn-success btn-sm">
+              Adicionar
+            </Link>
+          ) : <div />
         }
       </div>
 
