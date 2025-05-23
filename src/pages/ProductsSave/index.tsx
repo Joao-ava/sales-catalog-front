@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Layout from './Layout';
 import api from '../../services/api';
+import Product from '../../dtos/Product';
 
 export default function ProductsSave() {
   const [nome, setNome] = useState('');
@@ -9,6 +10,7 @@ export default function ProductsSave() {
   const [preco, setPreco] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>()
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,9 +27,14 @@ export default function ProductsSave() {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       }
-      await api.post('/products', form, config);
+      if (!id) {
+        await api.post('/products', form, config);
+        alert('Produto cadastrado com sucesso!');
+      } else {
+        await api.put(`/products/${id}`, form, config);
+        alert('Produto atualizado com sucesso!');
+      }
 
-      alert('Produto cadastrado com sucesso!');
       navigate('/menu');
     } catch (error) {
       console.error(error);
@@ -37,8 +44,33 @@ export default function ProductsSave() {
     }
   }
 
+  const fetchProduct = useCallback(async () => {
+    if (!id) return;
+    setLoading(true);
+    try {
+      const { data } = await api.get<Product>(`/products/${id}`);
+      setNome(data.nome);
+      setPreco(data.preco);
+      const response = await fetch(data.imagem)
+      const blobData = await response.blob()
+      const items = data.imagem.split('/')
+      const fileName = items[items.length - 1]
+      const file = new File([blobData], fileName, {
+        type: blobData.type || 'image/jpeg',
+      });
+      setImagem(file);
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
+
   return (
     <Layout
+      isEdit={!!id}
       nome={nome}
       setNome={setNome}
       imagem={imagem ? URL.createObjectURL(imagem) : ''}

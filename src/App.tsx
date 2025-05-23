@@ -24,6 +24,7 @@ function App() {
         <Route path="/stores/map" element={<StoreMap />} />
         <Route path="/stores/:id/products" element={<ProductsList />} />
         <Route path="/products/save" element={<ProductsSave />} />
+        <Route path="/products/:id/edit" element={<ProductsSave />} />
         <Route path="/settings" element={<UsersEdit />} />
       </Routes>
     </Router>

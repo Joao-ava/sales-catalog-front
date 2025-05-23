@@ -1,5 +1,6 @@
 import React from 'react';
 import Product from '../../../dtos/Product'
+import { Link } from 'react-router-dom';
 
 export interface ProductsListProps {
   loading: boolean
@@ -17,9 +18,9 @@ const Layout: React.FC<ProductsListProps> = ({
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h4>{canAdd ? 'Seus Produtos' : 'Produtos'}</h4>
         {canAdd && (
-          <a href="/products/save" className="btn btn-success btn-sm">
+          <Link to="/products/save" className="btn btn-success btn-sm">
             Adicionar
-          </a>)
+          </Link>)
         }
       </div>
 
@@ -29,7 +30,7 @@ const Layout: React.FC<ProductsListProps> = ({
       ) : (
         <div className="row">
           {products.map((item) => (
-            <div className="col-6 col-md-4 col-lg-3 mb-4" key={item._id}>
+            <Link to={canAdd ? `/products/${item._id}/edit` : '#'} className="col-6 col-md-4 col-lg-3 mb-4 text-decoration-none" key={item._id}>
               <div className="text-center">
                 <img
                   src={item.imagem}
@@ -39,7 +40,7 @@ const Layout: React.FC<ProductsListProps> = ({
                 <p className="mt-2 mb-0 fw-bold">{item.nome}</p>
                 <p className="text-muted">R$ {item.preco.toFixed(2)}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

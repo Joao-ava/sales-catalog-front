@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export interface ProductsSaveProps {
+  isEdit: boolean
   loading: boolean
   nome: string
   setNome: (value: string) => void
@@ -14,6 +15,7 @@ export interface ProductsSaveProps {
 }
 
 export default function Layout({
+  isEdit,
   nome,
   setNome,
   imagem,
@@ -31,7 +33,7 @@ export default function Layout({
   return (
     <div className="d-flex align-items-center justify-content-center min-vh-100 bg-white">
       <div className="card p-4 shadow" style={{ width: "400px" }}>
-        <h4 className="text-center mb-4">Cadastro de produto</h4>
+        <h4 className="text-center mb-4">{isEdit ? 'Cadastro de produto' : 'Atualizar produto'}</h4>
         <form onSubmit={onSubmit}>
           <div className="mb-3 text-start">
             <label className="form-label">Nome</label>
@@ -52,7 +54,7 @@ export default function Layout({
               accept="image/*"
               className="form-control"
               onChange={handleImagemChange}
-              required
+              required={!imagem}
             />
           </div>
           <img src={imagem} className="img-thumbnail" />

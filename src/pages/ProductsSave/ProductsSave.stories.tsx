@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Layout, { ProductsSaveProps } from './Layout';
 
 const defaultArgs: ProductsSaveProps = {
+  isEdit: false,
   nome: '',
   imagem: '',
   preco: 0,
@@ -18,7 +19,7 @@ const defaultArgs: ProductsSaveProps = {
 
 const Component = (props: ProductsSaveProps) => {
   const [nome, setNome] = useState(props.nome)
-  const [imagem, setImagem] = useState(props.imagem)
+  const [imagem, setImagem] = useState<File>()
   const [preco, setPreco] = useState(props.preco)
   return (
     <BrowserRouter>
@@ -26,7 +27,7 @@ const Component = (props: ProductsSaveProps) => {
         {...props}
         nome={nome}
         setNome={setNome}
-        imagem={imagem}
+        imagem={imagem ? URL.createObjectURL(imagem) : ''}
         setImagem={setImagem}
         preco={preco}
         setPreco={setPreco}
