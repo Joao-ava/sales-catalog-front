@@ -30,7 +30,7 @@ const Layout: React.FC<ProductsListProps> = ({
       ) : (
         <div className="row">
           {products.map((item) => (
-            <Link to={canAdd ? `/products/${item._id}/edit` : '#'} className="col-6 col-md-4 col-lg-3 mb-4 text-decoration-none" key={item._id}>
+            <Link to={canAdd ? `/products/${item._id}/edit` : '#'} className="col-6 col-md-4 col-lg-3 mb-4 text-decoration-none text-body" key={item._id}>
               <div className="text-center">
                 <img
                   src={item.imagem}
