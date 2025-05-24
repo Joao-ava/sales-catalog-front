@@ -1,8 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Trash, Plus, Image } from 'lucide-react';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { Horario } from '../../../dtos/Store';
 import { weekDays } from '../../../utils/weekdays';
+import MapLocationInput from '../../../components/MapLocationInput';
+import { LatLng } from 'leaflet';
+import { Link } from 'react-router-dom';
 
 export interface StoreSaveProps {
   name: string;
@@ -11,10 +15,14 @@ export interface StoreSaveProps {
   imagem: string;
   horarios: Horario[];
   setHorarios: (values: Horario[]) => void;
+  lat: number;
+  lng: number;
+  setLat: (value: number) => void
+  setLng: (value: number) => void
   loading: boolean;
-  onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlocoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onReferenciaChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setName: (value: string) => void;
+  setBloco: (value: string) => void;
+  setReferencia: (value: string) => void;
   onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSave: () => void;
 }
@@ -27,9 +35,13 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({
   horarios,
   setHorarios,
   loading,
-  onNameChange,
-  onBlocoChange,
-  onReferenciaChange,
+  lat,
+  lng,
+  setLat,
+  setLng,
+  setName,
+  setBloco,
+  setReferencia,
   onImageChange,
   onSave,
 }) => {
@@ -41,13 +53,18 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({
     setHorarios(horarios.filter((_, i) => i !== indice));
   };
 
+  const onChangePosition = (position: LatLng) => {
+    setLat(position.lat);
+    setLng(position.lng);
+  };
+
   return (
     <div className="container mt-4 px-3" style={{ maxWidth: 400 }}>
       <h4 className="fw-bold mb-3 text-start">Cadastro de loja</h4>
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Nome</label>
-        <input type="text" className="form-control rounded-3" placeholder="Nome do estabelecimento" value={name} onChange={onNameChange} />
+        <input type="text" className="form-control rounded-3" placeholder="Nome do estabelecimento" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
 
       <div className="mb-2 text-start">
@@ -61,13 +78,21 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Bloco</label>
-        <input type="text" className="form-control rounded-3" placeholder="Perto de qual bloco está" value={bloco} onChange={onBlocoChange} />
+        <input type="text" className="form-control rounded-3" placeholder="Perto de qual bloco está" value={bloco} onChange={(e) => setBloco(e.target.value)} />
       </div>
 
       <div className="mb-2 text-start">
         <label className="form-label text-start">Ponto de referência</label>
-        <input type="text" className="form-control rounded-3" placeholder="Cite um ponto de referência" value={referencia} onChange={onReferenciaChange} />
+        <input type="text" className="form-control rounded-3" placeholder="Cite um ponto de referência" value={referencia} onChange={(e) => setReferencia(e.target.value)} />
       </div>
+
+      <MapContainer center={[-3.769516294283572, -38.480243680943545]} zoom={20} style={{ height: "300px", width: "100%" }}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <MapLocationInput position={[lat, lng]} onChange={onChangePosition} />
+      </MapContainer>
 
       <h6 className="fw-bold mt-4 mb-2 text-start">Horário de funcionamento</h6>
       {horarios.map((item, indice) => (
@@ -112,7 +137,7 @@ const FormularioLoja: React.FC<StoreSaveProps> = ({
       </div>
 
       <button disabled={loading} onClick={onSave} className="btn btn-success w-100 rounded-3 mb-2">Salvar</button>
-      <button className="btn text-success w-100">Cancelar</button>
+      <Link to="/menu" className="btn text-success w-100">Cancelar</Link>
     </div>
   );
 };
