@@ -44,6 +44,18 @@ export default function ProductsSave() {
     }
   }
 
+  async function onDelete(e: React.FormEvent) {
+    e.preventDefault();
+    if (!id) return;
+    setLoading(true);
+    try {
+      await api.delete(`/products/${id}`);
+      navigate('/menu');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const fetchProduct = useCallback(async () => {
     if (!id) return;
     setLoading(true);
@@ -79,6 +91,7 @@ export default function ProductsSave() {
       setPreco={setPreco}
       loading={loading}
       onSubmit={onSubmit}
+      onDelete={onDelete}
     />
   );
 }

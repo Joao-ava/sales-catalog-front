@@ -14,7 +14,8 @@ const defaultArgs: ProductsSaveProps = {
   setImagem: fn(),
   setPreco: fn(),
   loading: false,
-  onSubmit: fn()
+  onSubmit: fn(),
+  onDelete: fn()
 }
 
 const Component = (props: ProductsSaveProps) => {

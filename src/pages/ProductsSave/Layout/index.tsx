@@ -12,6 +12,7 @@ export interface ProductsSaveProps {
   preco: number
   setPreco: (value: number) => void
   onSubmit: (e: React.FormEvent) => void
+  onDelete: (e: React.FormEvent) => void
 }
 
 export default function Layout({
@@ -23,7 +24,8 @@ export default function Layout({
   preco,
   setPreco,
   loading,
-  onSubmit
+  onSubmit,
+  onDelete
 }: ProductsSaveProps) {
   function handleImagemChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -75,6 +77,12 @@ export default function Layout({
           <button type="submit" disabled={loading} className="btn btn-success w-100">
             Salvar
           </button>
+
+          {isEdit && (
+            <button className="btn text-success mt-3 w-100" onClick={onDelete}>
+              Apagar
+            </button>
+          )}
 
           <Link
             className="btn text-success mt-3 w-100"
