@@ -4,7 +4,7 @@ import { Marker, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 interface MapLocationInputProps {
-  position: LatLng
+  position: [number, number]
   onChange: (params: LatLng) => void
 }
 const MapLocationInput: React.FC<MapLocationInputProps> = ({ position, onChange }) => {
