@@ -31,7 +31,7 @@ const Layout: React.FC<StoreMapProps> = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {stores.map((item) => (
-          <Marker position={[item.lng || 0, item.lat || 0]} key={item._id}>
+          <Marker position={[item.lat || 0, item.lng || 0]} key={item._id}>
             <Popup>
               {item.name} <br />
               <a href={`/stores/${item._id}/products`}>Acesse aqui</a>.
