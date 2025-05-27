@@ -16,13 +16,14 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<StoreList />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/" element={<StoreList />} />
-        <Route path="/store" element={<StoreSave />} />
         <Route path="/stores/map" element={<StoreMap />} />
         <Route path="/stores/:id/products" element={<ProductsList />} />
+
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/store" element={<StoreSave />} />
         <Route path="/products/save" element={<ProductsSave />} />
         <Route path="/products/:id/edit" element={<ProductsSave />} />
         <Route path="/settings" element={<UsersEdit />} />

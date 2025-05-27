@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import Layout from './Layout'
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
 import { AxiosError } from 'axios';
+
+import api from '../../services/api';
+import Layout from './Layout'
+import useIsLoggedEffect from '../../hook/useIsLoggedEffect';
 
 const UsersEdit = () => {
   const currentUser = JSON.parse(localStorage.getItem('user') || '{}')
@@ -11,6 +13,8 @@ const UsersEdit = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
+
+  useIsLoggedEffect();
 
   const onCancel = () => {
     // voltar para página anterior

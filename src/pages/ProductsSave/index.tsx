@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Layout from './Layout';
+
 import api from '../../services/api';
 import Product from '../../dtos/Product';
+import useIsLoggedEffect from '../../hook/useIsLoggedEffect';
+import Layout from './Layout';
 
 export default function ProductsSave() {
   const [nome, setNome] = useState('');
@@ -11,6 +13,8 @@ export default function ProductsSave() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>()
+
+  useIsLoggedEffect();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();

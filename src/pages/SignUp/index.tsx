@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import api from '../../services/api';
 import SignUpLayout from './Layout';
@@ -34,6 +34,9 @@ const SignUp: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const isLogged = localStorage.getItem('token');
+  if (isLogged) return <Navigate to="/menu" />
 
   return (
     <SignUpLayout

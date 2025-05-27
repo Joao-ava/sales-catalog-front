@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from './Layout';
 import Store, { Horario } from '../../dtos/Store';
 import api from '../../services/api';
+import useIsLoggedEffect from '../../hook/useIsLoggedEffect';
 
 const StoreSave: React.FC = () => {
   const navigate = useNavigate();
@@ -18,6 +19,9 @@ const StoreSave: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem('token') || ''
+
+  useIsLoggedEffect();
+
   const fetchStore = useCallback(async () => {
     setLoading(true);
     try {
