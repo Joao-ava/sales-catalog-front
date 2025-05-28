@@ -86,7 +86,7 @@ export default function Layout({
 
           <Link
             className="btn text-success mt-3 w-100"
-            to="/produtos"
+            to="/menu"
           >
             Cancelar
           </Link>
