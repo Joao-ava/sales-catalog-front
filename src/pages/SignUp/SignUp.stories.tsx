@@ -6,6 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import Layout, { SignUpProps } from './Layout';
 
 const defaultArgs: SignUpProps = {
+  confirmarSenha: '',
+  senha: '',
+  setConfirmarSenha: fn(),
+  setSenha: fn(),
   email: '',
   nome: '',
   setEmail: fn(),
