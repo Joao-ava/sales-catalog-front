@@ -2,6 +2,7 @@ import React from "react";
 import { LatLng } from "leaflet";
 import { Marker, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
+import { markerIcon } from "../../utils/markerIcon";
 
 interface MapLocationInputProps {
   position: [number, number]
@@ -15,7 +16,7 @@ const MapLocationInput: React.FC<MapLocationInputProps> = ({ position, onChange 
     },
   });
 
-  return position ? <Marker position={position} /> : null;
+  return position ? <Marker position={position} icon={markerIcon} /> : null;
 };
 
 export default MapLocationInput;
