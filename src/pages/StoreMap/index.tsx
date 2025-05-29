@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
 import Store from '../../dtos/Store';
+import api from '../../services/api';
 
 const StoreMap: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]);
@@ -9,9 +10,7 @@ const StoreMap: React.FC = () => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const res = await fetch('http://localhost:3000/stores');
-        if (!res.ok) throw new Error('Erro ao buscar lojas');
-        const data = await res.json();
+        const { data } = await api.get('/stores');
         setStores(data);
       } catch (error) {
         console.error(error);
